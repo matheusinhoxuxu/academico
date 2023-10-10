@@ -5,8 +5,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import CursosStack from './screens/cursos/CursosStack';
 import Professores from './screens/professores/Professores';
 import Disciplinas from './screens/disciplinas/Disciplinas';
-import Alunos from './screens/alunos/Alunos';
 import Turmas from './screens/turmas/Turmas';
+import AlunosStack from './screens/alunos/AlunosStack';
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -47,7 +47,7 @@ export default function App() {
           />
           <Tab.Screen
             name="alunos"
-            component={Alunos}
+            component={AlunosStack}
             options={{
               tabBarIcon: () => (
                 <MaterialCommunityIcons name="account-multiple-outline" size={26} />
