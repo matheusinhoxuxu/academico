@@ -23,7 +23,7 @@ const CursosForm = () => {
   return (
     <>
       <ScrollView style={{ margin: 15 }}>
-        <Text>Formulário de cursos</Text>
+        <Text style={{padding: 10, alignSelf: 'center'}}>Formulário de cursos</Text>
 
         <TextInput
           style={{ margin: 10 }}

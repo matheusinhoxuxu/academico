@@ -1,29 +1,28 @@
-
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 
-const AlunosForm = () => {
-    const [dados, setDados] = useState({})
+const ProfessoresForm = () => {
+  
+  const [dados, setDados] = useState({})
 
-    function handleChange(valor,campo){
-      setDados({...dados,[campo]:valor})
-    }
-  
-    function salvar(){
-      
-      
+  function handleChange(valor, campo) {
+      setDados({ ...dados, [campo]: valor })
+  }
+
+  function salvar() {
+
+
       console.log(dados)
-    }
-    
-    function handleChange(valor){
+  }
+
+  function handleChange(valor) {
       console.warn(valor)
-    }
-  
-    return (
+  }
+  return (
     <>
-      <ScrollView style={{ margin: 15 }}>
-        <Text style={{padding: 10, alignSelf: 'center'}}>Formulário de Alunos</Text>
+    <ScrollView style={{ margin: 15 }}>
+        <Text style={{alignSelf:'center',padding:10}}>Formulário de Professores</Text>
 
         <TextInput
           style={{ margin: 10 }}
@@ -52,51 +51,58 @@ const AlunosForm = () => {
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
-          label='Email'
+          label='Salario'
           value={dados.telefone}
+          onChangeText={(valor) =>handleChange(valor,'salario')} 
+          />
+        <TextInput
+          style={{ margin: 10 }}
+          mode='outlined'
+          label='Email'
+          value={dados.cep}
           onChangeText={(valor) =>handleChange(valor,'email')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
           label='Telefone'
-          value={dados.cep}
+          value={dados.logradouro}
           onChangeText={(valor) =>handleChange(valor,'telefone')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
           label='CEP'
-          value={dados.logradouro}
-          onChangeText={(valor) =>handleChange(valor,'cep')} 
+          value={dados.complemento}
+          onChangeText={(valor) =>handleChange(valor,'complemento')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
           label='Logradouro'
-          value={dados.complemento}
-          onChangeText={(valor) =>handleChange(valor,'logradouro')} 
+          value={dados.numero}
+          onChangeText={(valor) =>handleChange(valor,'Logradouro')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
           label='Complemento'
-          value={dados.numero}
-          onChangeText={(valor) =>handleChange(valor,'complemento')} 
+          value={dados.bairro}
+          onChangeText={(valor) =>handleChange(valor,'Complemento')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
           label='Numero'
           value={dados.bairro}
-          onChangeText={(valor) =>handleChange(valor,'numero')} 
+          onChangeText={(valor) =>handleChange(valor,'Numero')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
           label='Bairro'
           value={dados.bairro}
-          onChangeText={(valor) =>handleChange(valor,'bairro')} 
+          onChangeText={(valor) =>handleChange(valor,'Bairro')} 
           />
 
           <Button onPress={salvar}>Salvar </Button>
@@ -106,4 +112,4 @@ const AlunosForm = () => {
   )
 }
 
-export default AlunosForm
+export default ProfessoresForm

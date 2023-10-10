@@ -1,8 +1,19 @@
-import React from 'react'
 
-const Disciplinas = () => {
+import { Button, Text } from 'react-native-paper'
+
+
+const Disciplinas = ({navigation}) => {
   return (
-    <div>Disciplinas</div>
+    <>
+      <Text style={{padding:10,alignSelf:'center'}}>encaminhando para o formulário </Text>
+      <Button style={{marginHorizontal:100}}
+      icon='plus' 
+      mode='contained'
+      onPress={() => navigation.push('disciplinas-form')}
+      >
+        Novo
+        </Button>    
+    </>
   )
 }
 
