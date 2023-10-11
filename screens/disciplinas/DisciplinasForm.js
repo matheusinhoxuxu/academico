@@ -24,7 +24,7 @@ const DisciplinasForms = () => {
     return (
         <>
             <ScrollView style={{ margin: 15 }}>
-                <Text style={{alignSelf:'center'}}>Formulário de cursos</Text>
+                <Text style={{alignSelf:'center'}}>Formulário de Disciplinas</Text>
 
                 <TextInput
                     style={{ margin: 10 }}
