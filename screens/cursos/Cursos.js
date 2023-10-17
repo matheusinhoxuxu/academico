@@ -8,6 +8,7 @@ const Cursos = ({ navigation }) => {
 
   const [cursos, setCursos] = useState([])
 
+  //recarrega a página toda vez que dados são adicionados,removidos or modificadods
   useFocusEffect(
     React.useCallback(() => {
 
@@ -21,7 +22,7 @@ const Cursos = ({ navigation }) => {
     }, [])
   );
 
-
+// o useEffect precisa recarregar toda vez a página 
 
   return (
     <>
