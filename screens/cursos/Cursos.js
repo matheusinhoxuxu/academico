@@ -1,41 +1,58 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useFocusEffect } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
-import { ScrollView } from 'react-native'
-import { Button, Card, Text } from 'react-native-paper'
+import { ScrollView, View } from 'react-native'
+import { Button, Card, FAB, IconButton, Text } from 'react-native-paper'
 
-const Cursos = ({navigation}) => {
+const Cursos = ({ navigation }) => {
 
   const [cursos, setCursos] = useState([])
 
-  useEffect(() =>{
-    AsyncStorage.getItem('cursos').then(resultado =>{
-      
-      resultado = JSON.parse(resultado) || []
+  useFocusEffect(
+    React.useCallback(() => {
 
-      console.log(resultado)
-      setCursos(resultado)
-    })
-  },[])
+      AsyncStorage.getItem('cursos').then(resultado => {
+
+        resultado = JSON.parse(resultado) || []
+
+        console.log(resultado)
+        setCursos(resultado)
+      })
+    }, [])
+  );
+
+
 
   return (
-    <ScrollView>
-      {cursos.map(item=>(
-       <Card style={{margin:10, padding:15}}> 
-        <Text>{item.nome}</Text>
-        <Text>{item.duracao} </Text>
-        <Text>{item.modalidade}</Text>
-       </Card>
-      ))}
+    <>
 
-      <Text style={{padding:10,alignSelf:'center'}}>encaminhando para o formulário </Text>
-      <Button style={{marginHorizontal:100}}
-      icon='plus' 
-      mode='contained'
-      onPress={() => navigation.push('cursos-form')}
-      >
-        Novo
-        </Button>    
-    </ScrollView>
+      <ScrollView style={{ padding: 15, }}>
+        <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 10, marginBottom: 10 }}>
+         
+        </View>
+        {cursos.map((item, i) => (
+          <Card key={i} style={{ margin: 10, }} mode='outlined'>
+            <Card.Content>
+              <Text variant="titleLarge">{item.nome}</Text>
+              <Text variant="bodyMedium">Duração:{item.duracao}</Text>
+              <Text variant="bodyMedium">Modalidade:{item.modalidade}</Text>
+            </Card.Content>
+            <Card.Actions>
+              <IconButton icon='pencil-outline' iconColor='blue' />
+              <IconButton icon='trash-can-outline' iconColor='yellow' />
+            </Card.Actions>
+          </Card>
+        ))}
+
+      </ScrollView>
+      <FAB
+        icon="plus"
+        style={{ position: 'absolute', margin: 16, right: 0, bottom: 0, }}
+        size='small'
+        onPress={() => navigation.push('cursos-form')}
+      />
+    </>
+
   )
 }
 
