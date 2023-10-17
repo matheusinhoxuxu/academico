@@ -1,18 +1,61 @@
-import React from 'react'
-import { Button, Text } from 'react-native-paper'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useState } from 'react'
+import { ScrollView, View } from 'react-native';
+import { Button, Card, FAB, IconButton, Text } from 'react-native-paper'
 
 const Professores = ({navigation}) => {
+  const [professores, setProfessores] = useState([])
+
+  useFocusEffect(
+    React.useCallback(() => {
+
+      AsyncStorage.getItem('alunos').then(resultado => {
+
+        resultado = JSON.parse(resultado) || []
+
+        console.log(resultado)
+        setProfessores(resultado)
+      })
+    }, [])
+  );
   return (
     <>
-      <Text style={{ padding: 10, alignSelf: 'center' }}>encaminhando para o formulário </Text>
-      <Button style={{ marginHorizontal: 100 }}
-        icon='plus'
-        mode='contained'
-        onPress={() => navigation.push('professores-form')}
-      >
-        Novo
-      </Button>
-    </>
+
+    <ScrollView style={{ padding: 15, }}>
+      <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 10, marginBottom: 10 }}>
+       
+      </View>
+      {professores.map((item, i) => (
+        <Card key={i} style={{ margin: 10, }} mode='outlined'>
+          <Card.Content>
+            <Text variant="titleLarge">{item.nome}</Text>
+            <Text variant="bodyMedium">{item.cpf}</Text>
+            <Text variant="bodyMedium">{item.matricula}</Text>
+            <Text variant="bodyMedium">{item.salario}</Text>
+            <Text variant="bodyMedium">{item.email}</Text>
+            <Text variant="bodyMedium">{item.telefone}</Text>
+            <Text variant="bodyMedium">{item.cep}</Text>
+            <Text variant="bodyMedium">{item.logradouro}</Text>
+            <Text variant="bodyMedium">{item.complemento}</Text>
+            <Text variant="bodyMedium">{item.numero}</Text>
+            <Text variant="bodyMedium">{item.bairro}</Text>
+          </Card.Content>
+          <Card.Actions>
+            <IconButton icon='pencil-outline' iconColor='blue' />
+            <IconButton icon='trash-can-outline' iconColor='yellow' />
+          </Card.Actions>
+        </Card>
+      ))}
+
+    </ScrollView>
+    <FAB
+      icon="plus"
+      style={{ position: 'absolute', margin: 16, right: 0, bottom: 0, }}
+      size='small'
+      onPress={() => navigation.push('professores-form')}
+    />
+  </>
   )
 }
 

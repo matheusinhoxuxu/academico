@@ -43,7 +43,7 @@ const CursosForm = ({ navigation }) => {
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
-          label='Nome'
+          label='nome'
           value={dados.nome}
           onChangeText={(valor) => handleChange(valor, 'nome')}
         />
@@ -51,7 +51,7 @@ const CursosForm = ({ navigation }) => {
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
-          label='Duração'
+          label='duração'
           value={dados.duracao}
           keyboardType='decimal-pad'
           onChangeText={(valor) => handleChange(valor, 'duracao')}
@@ -60,7 +60,7 @@ const CursosForm = ({ navigation }) => {
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
-          label='Modalidade'
+          label='modalidade'
           value={dados.modalidade}
           onChangeText={(valor) => handleChange(valor, 'modalidade')}
         />

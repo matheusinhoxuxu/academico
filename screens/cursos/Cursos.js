@@ -35,8 +35,8 @@ const Cursos = ({ navigation }) => {
           <Card key={i} style={{ margin: 10, }} mode='outlined'>
             <Card.Content>
               <Text variant="titleLarge">{item.nome}</Text>
-              <Text variant="bodyMedium">Duração:{item.duracao}</Text>
-              <Text variant="bodyMedium">Modalidade:{item.modalidade}</Text>
+              <Text variant="bodyMedium">{item.cpf}</Text>
+              <Text variant="bodyMedium">{item.modalidade}</Text>
             </Card.Content>
             <Card.Actions>
               <IconButton icon='pencil-outline' iconColor='blue' />

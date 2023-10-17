@@ -1,9 +1,10 @@
 
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 
-const AlunosForm = () => {
+const AlunosForm = ({navigation}) => {
     const [dados, setDados] = useState({})
 
     function handleChange(valor,campo){
@@ -11,14 +12,24 @@ const AlunosForm = () => {
     }
   
     function salvar(){
-      
+      AsyncStorage.getItem('alunos').then(resultado => {
+
+        const alunos = JSON.parse(resultado) || []
+  
+        alunos.push(dados)
+        console.log(dados)
+  
+  
+        AsyncStorage.setItem('alunos', JSON.stringify(alunos)) //
+  
+        navigation.goBack()
+  
+      })
       
       console.log(dados)
     }
     
-    function handleChange(valor){
-      console.warn(valor)
-    }
+    
   
     return (
     <>
@@ -45,59 +56,53 @@ const AlunosForm = () => {
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
-          label='Matricula'
-          value={dados.email}
-          onChangeText={(valor) =>handleChange(valor,'matricula')} 
-          />
-        <TextInput
-          style={{ margin: 10 }}
-          mode='outlined'
           label='Email'
-          value={dados.telefone}
-          onChangeText={(valor) =>handleChange(valor,'email')} 
+          value={dados.email}
+          onChangeText={(valor) =>handleChange(valor,'Email')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
           label='Telefone'
-          value={dados.cep}
+          value={dados.telefone}
           onChangeText={(valor) =>handleChange(valor,'telefone')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
           label='CEP'
-          value={dados.logradouro}
-          onChangeText={(valor) =>handleChange(valor,'cep')} 
+          value={dados.cep}
+          onChangeText={(valor) =>handleChange(valor,'CEP')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
           label='Logradouro'
-          value={dados.complemento}
+          value={dados.logradouro}
           onChangeText={(valor) =>handleChange(valor,'logradouro')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
-          label='Complemento'
-          value={dados.numero}
+          label='complemento'
+          value={dados.complemento}
           onChangeText={(valor) =>handleChange(valor,'complemento')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
-          label='Numero'
-          value={dados.bairro}
+          label='numero'
+          value={dados.numero}
           onChangeText={(valor) =>handleChange(valor,'numero')} 
           />
         <TextInput
           style={{ margin: 10 }}
           mode='outlined'
-          label='Bairro'
+          label='bairro'
           value={dados.bairro}
           onChangeText={(valor) =>handleChange(valor,'bairro')} 
           />
+        
 
           <Button onPress={salvar}>Salvar </Button>
 
