@@ -31,18 +31,18 @@ const Alunos = ({ navigation }) => {
           <Card key={i} style={{ margin: 10, }} mode='outlined'>
             <Card.Content>
               <Text variant="titleLarge">{item.nome}</Text>
-              <Text variant="bodyMedium">{item.cpf}</Text>
-              <Text variant="bodyMedium">{item.email}</Text>
-              <Text variant="bodyMedium">{item.telefone}</Text>
-              <Text variant="bodyMedium">{item.cep}</Text>
-              <Text variant="bodyMedium">{item.logradouro}</Text>
-              <Text variant="bodyMedium">{item.complemento}</Text>
-              <Text variant="bodyMedium">{item.numero}</Text>
-              <Text variant="bodyMedium">{item.bairro}</Text>
+              <Text variant="titleMedium">cpf:{item.cpf}</Text>
+              <Text variant="titleMedium">email:{item.email}</Text>
+              <Text variant="titleMedium">telefone:{item.telefone}</Text>
+              <Text variant="titleMedium">cep:{item.cep}</Text>
+              <Text variant="titleMedium">logradouro:{item.logradouro}</Text>
+              <Text variant="titleMedium">complemento:{item.complemento}</Text>
+              <Text variant="titleMedium">numero:{item.numero}</Text>
+              <Text variant="titleMedium">bairro:{item.bairro}</Text>
             </Card.Content>
             <Card.Actions>
-              <IconButton icon='pencil-outline' iconColor='blue' />
-              <IconButton icon='trash-can-outline' iconColor='yellow' />
+              <IconButton icon='pencil-outline'  />
+              <IconButton icon='trash-can-outline' />
             </Card.Actions>
           </Card>
         ))}

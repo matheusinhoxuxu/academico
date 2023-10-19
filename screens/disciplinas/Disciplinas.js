@@ -35,12 +35,12 @@ const Disciplinas = ({ navigation }) => {
           <Card key={i} style={{ margin: 10, }} mode='outlined'>
             <Card.Content>
               <Text variant="titleLarge">{item.nome}</Text>
-              <Text variant="bodyMedium">{item.curso}</Text>
+              <Text variant="bodyMedium">curso:{item.curso}</Text>
 
             </Card.Content>
             <Card.Actions>
-              <IconButton icon='pencil-outline' iconColor='blue' />
-              <IconButton icon='trash-can-outline' iconColor='yellow' />
+              <IconButton icon='pencil-outline'  />
+              <IconButton icon='trash-can-outline'  />
             </Card.Actions>
           </Card>
         ))}

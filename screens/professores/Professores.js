@@ -30,20 +30,20 @@ const Professores = ({navigation}) => {
         <Card key={i} style={{ margin: 10, }} mode='outlined'>
           <Card.Content>
             <Text variant="titleLarge">{item.nome}</Text>
-            <Text variant="bodyMedium">{item.cpf}</Text>
-            <Text variant="bodyMedium">{item.matricula}</Text>
-            <Text variant="bodyMedium">{item.salario}</Text>
-            <Text variant="bodyMedium">{item.email}</Text>
-            <Text variant="bodyMedium">{item.telefone}</Text>
-            <Text variant="bodyMedium">{item.cep}</Text>
-            <Text variant="bodyMedium">{item.logradouro}</Text>
-            <Text variant="bodyMedium">{item.complemento}</Text>
-            <Text variant="bodyMedium">{item.numero}</Text>
-            <Text variant="bodyMedium">{item.bairro}</Text>
+            <Text variant="bodyMedium">CPF:{item.cpf}</Text>
+            <Text variant="bodyMedium">matricula:{item.matricula}</Text>
+            <Text variant="bodyMedium">salario:{item.salario}</Text>
+            <Text variant="bodyMedium">email:{item.email}</Text>
+            <Text variant="bodyMedium">telefone:{item.telefone}</Text>
+            <Text variant="bodyMedium">cep:{item.cep}</Text>
+            <Text variant="bodyMedium">logradouro:{item.logradouro}</Text>
+            <Text variant="bodyMedium">complemento:{item.complemento}</Text>
+            <Text variant="bodyMedium">numero:{item.numero}</Text>
+            <Text variant="bodyMedium">bairro:{item.bairro}</Text>
           </Card.Content>
           <Card.Actions>
-            <IconButton icon='pencil-outline' iconColor='blue' />
-            <IconButton icon='trash-can-outline' iconColor='yellow' />
+            <IconButton icon='pencil-outline'  />
+            <IconButton icon='trash-can-outline'  />
           </Card.Actions>
         </Card>
       ))}
