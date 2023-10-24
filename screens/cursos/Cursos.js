@@ -79,8 +79,8 @@ const Cursos = ({ navigation }) => {
               <Text variant="bodyMedium">Deseja realmente excluir o registro ?</Text>
             </Dialog.Content>
             <Dialog.Actions>
-              <Button onPress={excluir}>OK</Button>
-              <Button onPress={hideDialog}>negar</Button>
+              <Button onPress={excluir}>SIM</Button>
+              <Button onPress={hideDialog}>NÃO</Button>
             </Dialog.Actions>
           </Dialog>
         </Portal>
