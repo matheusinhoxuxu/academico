@@ -3,35 +3,38 @@ import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 
-const DisciplinasForms = ({navigation}) => {
+const DisciplinasForms = ({navigation,route}) => {
 
 
-
-    const [dados, setDados] = useState({})
-
-    function handleChange(valor, campo) {
-        setDados({ ...dados, [campo]: valor })
-    }
-
-    function salvar() {
+    const id = route.params?.id
+    const disciplinas = route.params?.disciplinas || {}
+  
+      const [dados, setDados] = useState(disciplinas)
+  
+      function handleChange(valor,campo){
+        setDados({...dados,[campo]:valor})
+      }
+    
+      function salvar(){
         AsyncStorage.getItem('disciplinas').then(resultado => {
-
-            const disciplinas = JSON.parse(resultado) || []
-      
+  
+          const disciplinas = JSON.parse(resultado) || []
+          if(id){
+            disciplinas.splice(id, 1, dados)
+          } else {
             disciplinas.push(dados)
-            console.log(dados)
-      
-      
-            AsyncStorage.setItem('disciplinas', JSON.stringify(disciplinas)) //
-      
-            navigation.goBack()
-      
-          })
-          
-          console.log(dados)
-
+          }
         
-    }
+          console.log(disciplinas)
+    
+          AsyncStorage.setItem('disciplinas', JSON.stringify(disciplinas)) //
+    
+          navigation.goBack()
+    
+        })
+        
+        
+      }
 
    
     return (

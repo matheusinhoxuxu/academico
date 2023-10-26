@@ -3,32 +3,37 @@ import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 
-const ProfessoresForm = ({navigation}) => {
+const ProfessoresForm = ({navigation,route}) => {
   
-  const [dados, setDados] = useState({})
+  const id = route.params?.id
+  const professores = route.params?.professores || {}
 
-  function handleChange(valor, campo) {
-      setDados({ ...dados, [campo]: valor })
-  }
+    const [dados, setDados] = useState(professores)
 
-  function salvar() {
-    AsyncStorage.getItem('alunos').then(resultado => {
+    function handleChange(valor,campo){
+      setDados({...dados,[campo]:valor})
+    }
+  
+    function salvar(){
+      AsyncStorage.getItem('professores').then(resultado => {
 
-      const professores = JSON.parse(resultado) || []
-
-      professores.push(dados)
-      console.log(dados)
-
-
-      AsyncStorage.setItem('professores', JSON.stringify(professores)) //
-
-      navigation.goBack()
-
-    })
-    
-
-      console.log(dados)
-  }
+        const professores = JSON.parse(resultado) || []
+        if(id){
+          professores.splice(id, 1, dados)
+        } else {
+          professores.push(dados)
+        }
+      
+        console.log(professores)
+  
+        AsyncStorage.setItem('professores', JSON.stringify(professores)) //
+  
+        navigation.goBack()
+  
+      })
+      
+      
+    }
 
   
   return (

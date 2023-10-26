@@ -3,14 +3,23 @@ import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
-import * as Yup from 'yup';
+import cursoValidator from '../../Validators/cursoValidator'
+import { mask } from 'remask'
+
 
 const CursosForm = ({ navigation, route }) => {
 
-  const curso = route.params?.curso || {}
+  let curso = {
+    nome: '',
+    duracao: '',
+    modalidade: ''
+  }
+
   const id = route.params?.id
 
-
+  if (id >= 0) {
+    curso = route.params?.curso
+  }
 
 
   function salvar(dados) {
@@ -25,7 +34,7 @@ const CursosForm = ({ navigation, route }) => {
         cursos.push(dados)
       }
 
-      console.log(dados)
+      console.log(cursos)
 
 
       AsyncStorage.setItem('cursos', JSON.stringify(cursos)) //
@@ -35,14 +44,7 @@ const CursosForm = ({ navigation, route }) => {
     })
   }
 
-  const cursoValidator = Yup.object().shape({
-    nome: Yup.string()
-    .min(2, 'valor muito curto')
-    .max(10, 'Valor muito grande')
-    .required('Campo obrigátorio'),
-    duracao: Yup.number(),
-    modalidade: Yup.string(),
-  })
+
 
   return (
     <>
@@ -50,12 +52,44 @@ const CursosForm = ({ navigation, route }) => {
         <Text style={{ padding: 10, alignSelf: 'center' }}>Formulário de cursos</Text>
 
         <Formik
-          initialValues={{ curso }}
+          initialValues={curso}
           validationSchema={cursoValidator}
           onSubmit={values => salvar(values)}
         >
-          {({ values, handleChange, handleSubmit, errors, touched }) => (
+          {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => (
             <View>
+              <TextInput
+                style={{ margin: 10 }}
+                mode='outlined'
+                label='CPF'
+                value={values.cpf}
+                onChangeText={(value) => { setFieldValue('cpf', mask(value, '999.999-99')) }}
+              />
+
+              <TextInput
+                style={{ margin: 10 }}
+                mode='outlined'
+                label='CEP'
+                value={values.cep}
+                onChangeText={(value) => { setFieldValue('cep', mask(value,)) }}
+              />
+              <TextInput
+                style={{ margin: 10 }}
+                mode='outlined'
+                label='Data'
+                value={values.data}
+                onChangeText={(value) => { setFieldValue('data', mask(value)) }}
+              />
+              <TextInput
+                style={{ margin: 10 }}
+                mode='outlined'
+                label='Telefone'
+                value={values.telefone}
+                onChangeText={(value) => { setFieldValue('telefone', mask(value)) }}
+              />
+
+
+
               <TextInput
                 style={{ margin: 10 }}
                 mode='outlined'
@@ -95,6 +129,7 @@ const CursosForm = ({ navigation, route }) => {
                   {errors.modalidade}
                 </Text>
               }
+
 
               <Button onPress={handleSubmit}>Salvar </Button>
             </View>
