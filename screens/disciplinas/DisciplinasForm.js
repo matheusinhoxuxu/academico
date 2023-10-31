@@ -1,70 +1,98 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Formik } from 'formik'
 import React, { useState } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
+import disciplinasValidator from '../../Validators/disciplinaValidator'
 
-const DisciplinasForms = ({navigation,route}) => {
+const DisciplinasForms = ({ navigation, route }) => {
+
+  let disciplina = {
+    nome: '',
+    curso: ''
+  }
+
+  const id = route.params?.id
+
+  if (id >= 0) {
+    disciplina = route.params?.disciplina
+  }
 
 
-    const id = route.params?.id
-    const disciplinas = route.params?.disciplinas || {}
-  
-      const [dados, setDados] = useState(disciplinas)
-  
-      function handleChange(valor,campo){
-        setDados({...dados,[campo]:valor})
-      }
-    
-      function salvar(){
-        AsyncStorage.getItem('disciplinas').then(resultado => {
-  
-          const disciplinas = JSON.parse(resultado) || []
-          if(id){
-            disciplinas.splice(id, 1, dados)
-          } else {
-            disciplinas.push(dados)
-          }
-        
-          console.log(disciplinas)
-    
-          AsyncStorage.setItem('disciplinas', JSON.stringify(disciplinas)) //
-    
-          navigation.goBack()
-    
-        })
-        
-        
+
+  function salvar(dados) {
+    AsyncStorage.getItem('disciplinas').then(resultado => {
+
+      const disciplinas = JSON.parse(resultado) || []
+
+      if (id >= 0) {
+        disciplinas.splice(id, 1, dados)
+      } else {
+        disciplinas.push(dados)
       }
 
-   
-    return (
-        <>
-            <ScrollView style={{ margin: 15 }}>
-                <Text style={{alignSelf:'center'}}>Formulário de Disciplinas</Text>
+      console.log(disciplinas)
 
-                <TextInput
-                    style={{ margin: 10 }}
-                    mode='outlined'
-                    label='Nome'
-                    value={dados.nome}
-                    onChangeText={(valor) => handleChange(valor, 'nome')}
-                />
 
-                <TextInput
-                    style={{ margin: 10 }}
-                    mode='outlined'
-                    label='curso'
-                    value={dados.curso}
-                    keyboardType='decimal-pad'
-                    onChangeText={(valor) => handleChange(valor, 'curso')}
-                />
+      AsyncStorage.setItem('disciplinas', JSON.stringify(disciplinas)) //
 
-                
-                <Button onPress={salvar}>Salvar</Button>
+      navigation.goBack()
 
-            </ScrollView>
-        </>
-    )
+    })
+
+
+  }
+
+
+  return (
+    <>
+      <ScrollView style={{ margin: 15 }}>
+        <Text style={{ alignSelf: 'center' }}>Formulário de Disciplinas</Text>
+        <Formik
+          initialValues={disciplina}
+          validationSchema={disciplinasValidator}
+          onSubmit={values => salvar(values)}
+        >
+
+
+          {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => (
+            <View>
+
+              <TextInput
+                style={{ margin: 10 }}
+                mode='outlined'
+                label='nome'
+                value={values.nome}
+                onChangeText={handleChange('nome')}
+              />
+              {(errors.nome && touched.nome) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.nome}
+                </Text>
+              }
+
+              <TextInput
+                style={{ margin: 10 }}
+                mode='outlined'
+                label='curso'
+                value={values.curso}
+                onChangeText={handleChange('curso')}
+              />
+              {(errors.curso && touched.curso) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.curso}
+                </Text>
+              }
+
+
+              <Button onPress={handleSubmit}>Salvar</Button>
+            </View>
+          )}
+        </Formik>
+
+      </ScrollView>
+    </>
+  )
 
 }
 

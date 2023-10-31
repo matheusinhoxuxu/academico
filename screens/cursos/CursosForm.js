@@ -5,6 +5,7 @@ import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 import cursoValidator from '../../Validators/cursoValidator'
 import { mask } from 'remask'
+import { Picker } from '@react-native-picker/picker'
 
 
 const CursosForm = ({ navigation, route }) => {
@@ -14,6 +15,8 @@ const CursosForm = ({ navigation, route }) => {
     duracao: '',
     modalidade: ''
   }
+  
+  const [selectedLanguage, setSelectedLanguage] = useState();
 
   const id = route.params?.id
 
@@ -58,7 +61,7 @@ const CursosForm = ({ navigation, route }) => {
         >
           {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => (
             <View>
-              <TextInput
+              {/* <TextInput
                 style={{ margin: 10 }}
                 mode='outlined'
                 label='CPF'
@@ -86,7 +89,7 @@ const CursosForm = ({ navigation, route }) => {
                 label='Telefone'
                 value={values.telefone}
                 onChangeText={(value) => { setFieldValue('telefone', mask(value)) }}
-              />
+              /> */}
 
 
 
@@ -97,6 +100,7 @@ const CursosForm = ({ navigation, route }) => {
                 value={values.nome}
                 onChangeText={handleChange('nome')}
               />
+              {console.log(errors)}
               {(errors.nome && touched.nome) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
                   {errors.nome}
@@ -117,19 +121,20 @@ const CursosForm = ({ navigation, route }) => {
                 </Text>
               }
 
-              <TextInput
-                style={{ margin: 10 }}
-                mode='outlined'
-                label='modalidade'
-                value={values.modalidade}
-                onChangeText={handleChange('modalidade')}
-              />
+              
+              <Picker style={{padding:10}}
+                selectedValue={values.modalidade}
+                onValueChange={handleChange('modalidade')}>
+                <Picker.Item label="Modalidade" value="" />
+                <Picker.Item label="Presencial" value="Presencial" />
+                <Picker.Item label="EAD" value="EAD" />
+                <Picker.Item label="Híbrido" value="Híbrido" />
+              </Picker>
               {(errors.modalidade && touched.modalidade) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
                   {errors.modalidade}
                 </Text>
               }
-
 
               <Button onPress={handleSubmit}>Salvar </Button>
             </View>
