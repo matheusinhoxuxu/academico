@@ -63,8 +63,9 @@ const DisciplinasForms = ({ navigation, route }) => {
                 mode='outlined'
                 label='nome'
                 value={values.nome}
-                onChangeText={handleChange('nome')}
+                onChangeText={(valor) => handleChange(valor, 'nome')}
               />
+              {console.log(errors)}
               {(errors.nome && touched.nome) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
                   {errors.nome}

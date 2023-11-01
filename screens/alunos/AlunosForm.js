@@ -78,12 +78,12 @@ const AlunosForm = ({ navigation, route }) => {
                 onChangeText={handleChange('nome')}
               />
 
-              {console.log(errors)}
+              {/* {console.log(errors)}
               {(errors.nome && touched.nome) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
                   {errors.nome}
                 </Text>
-              }
+              } */}
 
               <TextInput
                 style={{ margin: 10 }}

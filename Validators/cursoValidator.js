@@ -6,7 +6,7 @@ const cursoValidator = Yup.object().shape({
     .max(20, 'Valor muito grande')
     .required('Campo obrigátorio'),
     duracao: Yup.number(),
-    modalidade: Yup.string().strict(),
+    modalidade: Yup.string().strict().required('Campo obrigátorio'),
   })
 
   export default cursoValidator
