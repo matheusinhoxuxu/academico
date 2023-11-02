@@ -6,6 +6,7 @@ import { Button, Text, TextInput } from 'react-native-paper'
 import cursoValidator from '../../Validators/cursoValidator'
 import { mask } from 'remask'
 import { Picker } from '@react-native-picker/picker'
+import Validacao from '../../components/Validacao'
 
 
 const CursosForm = ({ navigation, route }) => {
@@ -100,12 +101,7 @@ const CursosForm = ({ navigation, route }) => {
                 value={values.nome}
                 onChangeText={handleChange('nome')}
               />
-              {console.log(errors)}
-              {(errors.nome && touched.nome) &&
-                <Text style={{ color: 'red', marginTop: 5 }}>
-                  {errors.nome}
-                </Text>
-              }
+              <Validacao errors={errors.nome } touched={touched.nome}/>
 
               <TextInput
                 style={{ margin: 10 }}
@@ -115,11 +111,7 @@ const CursosForm = ({ navigation, route }) => {
                 keyboardType='decimal-pad'
                 onChangeText={handleChange('duracao')}
               />
-              {(errors.duracao && touched.duracao) &&
-                <Text style={{ color: 'red', marginTop: 5 }}>
-                  {errors.duracao}
-                </Text>
-              }
+              <Validacao errors={errors.duracao } touched={touched.duracao}/>
 
               
               <Picker style={{padding:10}}
@@ -130,11 +122,7 @@ const CursosForm = ({ navigation, route }) => {
                 <Picker.Item label="EAD" value="EAD" />
                 <Picker.Item label="Híbrido" value="Híbrido" />
               </Picker>
-              {(errors.modalidade && touched.modalidade) &&
-                <Text style={{ color: 'red', marginTop: 5 }}>
-                  {errors.modalidade}
-                </Text>
-              }
+              <Validacao errors={errors.modalidade } touched={touched.modalidade}/>
 
               <Button onPress={handleSubmit}>Salvar </Button>
             </View>
