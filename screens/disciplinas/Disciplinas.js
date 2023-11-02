@@ -45,6 +45,7 @@ const Disciplinas = ({ navigation }) => {
     setVisible(false)
   }
 
+
   return (
     <>
 
@@ -56,6 +57,7 @@ const Disciplinas = ({ navigation }) => {
           <Card key={i} style={{ margin: 10, }} mode='outlined'>
             <Card.Content>
               <Text variant="titleLarge">{item.nome}</Text>
+              <Text variant="bodyMedium">Duração:{item.duracao}</Text>
               <Text variant="bodyMedium">curso:{item.curso}</Text>
 
             </Card.Content>

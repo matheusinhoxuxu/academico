@@ -22,6 +22,7 @@ const Professores = ({ navigation }) => {
   );
   function carregarDados() {
     AsyncStorage.getItem('professores').then(resultado => {
+      console.log(resultado);
       resultado = JSON.parse(resultado) || []
       setProfessores(resultado)
     })
@@ -45,6 +46,8 @@ const Professores = ({ navigation }) => {
 
       <ScrollView style={{ padding: 15, }}>
         <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 10, marginBottom: 10 }}>
+
+        {console.log(professores)}
 
         </View>
         {professores.map((item, i) => (

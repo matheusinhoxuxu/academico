@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
 import professoresValidator from '../../Validators/professoresValidator'
+import { mask } from 'remask'
 
 const ProfessoresForm = ({ navigation, route }) => {
 
@@ -47,7 +48,7 @@ const ProfessoresForm = ({ navigation, route }) => {
       console.log(professores)
 
 
-      AsyncStorage.setItem(' professores', JSON.stringify(professores)) //
+      AsyncStorage.setItem('professores', JSON.stringify(professores)) //
 
       navigation.goBack()
 
@@ -74,7 +75,7 @@ const ProfessoresForm = ({ navigation, route }) => {
                 mode='outlined'
                 label='nome'
                 value={values.nome}
-                onChangeText={(valor) => handleChange(valor, 'nome')}
+                onChangeText={ handleChange('nome')}
               />
               {console.log(errors)}
               {(errors.nome && touched.nome) &&
@@ -104,14 +105,14 @@ const ProfessoresForm = ({ navigation, route }) => {
                 mode='outlined'
                 label='salario'
                 value={values.salario}
-                onChangeText={(valor) => handleChange(valor, 'salario')}
+                onChangeText={ handleChange( 'salario')}
               />
               <TextInput
                 style={{ margin: 10 }}
                 mode='outlined'
                 label='email'
                 value={values.email}
-                onChangeText={(valor) => handleChange(valor, 'email')}
+                onChangeText={ handleChange( 'email')}
               />
               {console.log(errors)}
               {(errors.email && touched.email) &&
@@ -124,21 +125,21 @@ const ProfessoresForm = ({ navigation, route }) => {
                 mode='outlined'
                 label='telefone'
                 value={values.telefone}
-                onChangeText={(valor) => handleChange(valor, 'telefone')}
+                onChangeText={(value) => { setFieldValue('telefone', mask(value, '(61)99999-9999')) }}
               />
               <TextInput
                 style={{ margin: 10 }}
                 mode='outlined'
                 label='cep'
                 value={values.cep}
-                onChangeText={(valor) => handleChange(valor, 'cep')}
+                onChangeText={(value) => { setFieldValue('cep', mask(value, '999999999')) }}
               />
               <TextInput
                 style={{ margin: 10 }}
                 mode='outlined'
                 label='logradouro'
                 value={values.logradouro}
-                onChangeText={(valor) => handleChange(valor, 'logradouro')}
+                onChangeText={ handleChange( 'logradouro')}
               />
               {console.log(errors)}
               {(errors.logradouro && touched.logradouro) &&
@@ -151,21 +152,21 @@ const ProfessoresForm = ({ navigation, route }) => {
                 mode='outlined'
                 label='complemento'
                 value={values.complemento}
-                onChangeText={(valor) => handleChange(valor, 'complemento')}
+                onChangeText={ handleChange( 'complemento')}
               />
               <TextInput
                 style={{ margin: 10 }}
                 mode='outlined'
                 label='numero'
                 value={values.numero}
-                onChangeText={(valor) => handleChange(valor, 'numero')}
+                onChangeText={(value) => { setFieldValue('numero', mask(value, '99')) }}
               />
               <TextInput
                 style={{ margin: 10 }}
                 mode='outlined'
                 label='bairro'
                 value={values.bairro}
-                onChangeText={(valor) => handleChange(valor, 'bairro')}
+                onChangeText={handleChange( 'bairro')}
               />
               {console.log(errors)}
               {(errors.bairro && touched.bairro) &&

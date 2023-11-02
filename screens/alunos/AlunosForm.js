@@ -120,7 +120,7 @@ const AlunosForm = ({ navigation, route }) => {
                 mode='outlined'
                 label='Telefone'
                 value={values.telefone}
-                onChangeText={ handleChange('telefone')}
+                onChangeText={(value) => { setFieldValue('telefone', mask(value, '(61)99999-9999')) }}
               />
               <TextInput
                 style={{ margin: 10 }}

@@ -3,14 +3,19 @@ import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import { Button, Text, TextInput } from 'react-native-paper'
-import disciplinasValidator from '../../Validators/disciplinaValidator'
+import disciplinaValidator from '../../Validators/disciplinaValidator'
+import { mask } from 'remask'
 
-const DisciplinasForms = ({ navigation, route }) => {
+
+const DisciplinasForm = ({ navigation, route }) => {
 
   let disciplina = {
     nome: '',
-    curso: ''
+    duracao: '',
+    curso: '',
   }
+  
+  const [selectedLanguage, setSelectedLanguage] = useState();
 
   const id = route.params?.id
 
@@ -19,8 +24,8 @@ const DisciplinasForms = ({ navigation, route }) => {
   }
 
 
-
   function salvar(dados) {
+
     AsyncStorage.getItem('disciplinas').then(resultado => {
 
       const disciplinas = JSON.parse(resultado) || []
@@ -39,44 +44,56 @@ const DisciplinasForms = ({ navigation, route }) => {
       navigation.goBack()
 
     })
-
-
   }
+
 
 
   return (
     <>
       <ScrollView style={{ margin: 15 }}>
-        <Text style={{ alignSelf: 'center' }}>Formulário de Disciplinas</Text>
+        <Text style={{ padding: 10, alignSelf: 'center' }}>Formulário de disciplinas</Text>
+
         <Formik
           initialValues={disciplina}
-          validationSchema={disciplinasValidator}
-          onSubmit={values => salvar(values)}
+          validationSchema={disciplinaValidator}
+          onSubmit={dados => salvar(dados)}
         >
-
-
-          {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => (
+          {({ handleChange, handleSubmit, errors, touched, values, setFieldValue }) => (
             <View>
-
+             {console.log(values)}
               <TextInput
                 style={{ margin: 10 }}
                 mode='outlined'
                 label='nome'
                 value={values.nome}
-                onChangeText={(valor) => handleChange(valor, 'nome')}
+                onChangeText={handleChange('nome')}
               />
-              {console.log(errors)}
+             
               {(errors.nome && touched.nome) &&
                 <Text style={{ color: 'red', marginTop: 5 }}>
                   {errors.nome}
+                </Text>
+              }
+              <TextInput
+                style={{ margin: 10 }}
+                mode='outlined'
+                label='duracao'
+                value={values.duracao}
+                onChangeText={(value) => { setFieldValue('duracao', mask(value, '99')) }}
+              />
+             
+              {(errors.duracao && touched.duracao) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.duracao}
                 </Text>
               }
 
               <TextInput
                 style={{ margin: 10 }}
                 mode='outlined'
-                label='curso'
+                label='Curso'
                 value={values.curso}
+                keyboardType='decimal-pad'
                 onChangeText={handleChange('curso')}
               />
               {(errors.curso && touched.curso) &&
@@ -85,16 +102,16 @@ const DisciplinasForms = ({ navigation, route }) => {
                 </Text>
               }
 
-
-              <Button onPress={handleSubmit}>Salvar</Button>
+              <Button onPress={handleSubmit}>Salvar </Button>
             </View>
           )}
+
         </Formik>
+
 
       </ScrollView>
     </>
   )
-
 }
 
-export default DisciplinasForms
+export default DisciplinasForm
