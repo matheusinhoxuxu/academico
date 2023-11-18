@@ -174,6 +174,12 @@ const ProfessoresForm = ({ navigation, route }) => {
                   {errors.bairro}
                 </Text>
               }
+              {/* {console.log(errors)}
+              {(errors.bairro && touched.bairro) &&
+                <Text style={{ color: 'red', marginTop: 5 }}>
+                  {errors.bairro}
+                </Text>
+              } isso aqui não é nada, só arrumando as coisas*/}
 
               <Button onPress={handleSubmit}>Salvar </Button>
             </View>
